@@ -1,371 +1,275 @@
 main function
 
-  
+
+package Calculator;
 
 
-import java.awt.Color;
-import javax.swing.JFrame;
-
-public class Main {
-
- 
+public class CalculatorMain {
     public static void main(String[] args) {
-        JFrame f = new JFrame();
-        f.setTitle("Snake Game");
-        f.setBounds(10,10,905,700);
-        f.setResizable(false);
-        f.setVisible(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setBackground(Color.yellow);
-        
-        Gameplay gameplay = new Gameplay();
-        f.add(gameplay);
+       Calculator clas = new Calculator(); 
     }
     
 }
 
 
-gameplay
+calculator
 
 
-
+package Calculator;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Random;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
-
-public class Gameplay extends JPanel implements KeyListener,ActionListener{
-    private int[] snakexlength = new int[750];
-    private int[] snakeylength = new int[750];
-    
-    private boolean right=false;
-    private boolean left=false;
-    private boolean up=false;
-    private boolean down=false;
-    
-    private ImageIcon rightmouth;
-    private ImageIcon leftmouth;
-    private ImageIcon upmouth;
-    private ImageIcon downmouth;
-    private ImageIcon snakeimage;
-    
-    private int[]enemyxpos={25,50,75,100,125,150,175,200,225,250,270,300,325,350,375,400,425,450,475,
-                            500,525,550,575,600,625,650,675,700,725,750,775,800,825,850};
-    private int[]enemyypos={75,100,125,150,175,200,225,250,275,300,325,350,375,400,425,450,475,500,525,550,575};
-    
-    private ImageIcon enemyimage;
-    
-    private Random random = new Random();
-    
-    private int xpos=random.nextInt(34);
-    private int ypos=random.nextInt(23);
+ public class Calculator implements ActionListener{
+     
+    JFrame frame= new JFrame();
+    JPanel panel = new JPanel();
+    JTextArea textarea = new JTextArea(2,10);
+    JButton button1 = new JButton();
+    JButton button2 = new JButton();
+    JButton button3 = new JButton();
+    JButton button4 = new JButton();
+    JButton button5 = new JButton();
+    JButton button6 = new JButton();
+    JButton button7 = new JButton();
+    JButton button8 = new JButton();
+    JButton button9 = new JButton();
+    JButton button0 = new JButton();
 
     
-    private Timer timer;
-    private int delay=100;
+    //add button
+    JButton buttonadd = new JButton();
+    JButton buttonsub = new JButton();
+    JButton buttonmul = new JButton();
+    JButton buttondiv = new JButton();
+    JButton buttonclear = new JButton();
+    JButton buttondot = new JButton();
+    JButton buttonequal = new JButton();
+
+    double number1,number2,result;
+    int addc=0,mulc=0,divc=0,subc=0,equalc=0;
     
-    private int lengthofsnake=3;
-    private int moves=0;
-    private int score=0;
-
-
-    private ImageIcon titleImage;
-    public Gameplay(){
-      addKeyListener(this);
-      setFocusable(true);
-      setFocusTraversalKeysEnabled(true);
-      timer = new Timer(delay,this);
-      timer.start();
+    public Calculator(){
+        frame.setSize(340,450);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setTitle("Faruk Calculator");
+        //frame.setResizable(false);
+        frame.add(panel);
+        panel.setBackground(Color.LIGHT_GRAY);
+        Border border=BorderFactory.createLineBorder(Color.RED,4);
+        
+        panel.add(textarea);
+        panel.setBackground(Color.BLACK);
+        Border tborder=BorderFactory.createLineBorder(Color.BLUE,3);
+        textarea.setBorder(tborder);
+        Font font = new Font("arial",Font.BOLD,33);
+        textarea.setFont(font);
+        textarea.setForeground(Color.WHITE);
+        textarea.setPreferredSize(new Dimension(2,10));
+        textarea.setLineWrap(true);
+        
+        button1.setPreferredSize(new Dimension(100,40));
+        button1.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button1.png"));
+        
+        button2.setPreferredSize(new Dimension(100,40));
+        button2.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button2.png"));
+        
+        button3.setPreferredSize(new Dimension(100,40));
+        button3.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button3.png"));
+        
+        button4.setPreferredSize(new Dimension(100,40));
+        button4.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button4.png"));
+        
+        button5.setPreferredSize(new Dimension(100,40));
+        button5.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button5.png"));
+        
+        button6.setPreferredSize(new Dimension(100,40));
+        button6.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button6.png"));
+        
+        button7.setPreferredSize(new Dimension(100,40));
+        button7.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button7.png"));
+        
+        button8.setPreferredSize(new Dimension(100,40));
+        button8.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button8.png"));
+        
+        button9.setPreferredSize(new Dimension(100,40));
+        button9.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button9.png"));
+        
+        button0.setPreferredSize(new Dimension(100,40));
+        button0.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\button0.png"));
+        
+        buttondot.setPreferredSize(new Dimension(100,40));
+        buttondot.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\buttondot.png"));
+        
+        buttonadd.setPreferredSize(new Dimension(100,40));
+        buttonadd.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\buttonadd.png"));
+        
+        buttonsub.setPreferredSize(new Dimension(100,40));
+        buttonsub.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\buttonsub.png"));
+        
+        buttonmul.setPreferredSize(new Dimension(100,40));
+        buttonmul.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\buttonmul.png"));
+        
+        buttondiv.setPreferredSize(new Dimension(100,40));
+        buttondiv.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\buttondiv.png"));
+        
+        buttonclear.setPreferredSize(new Dimension(100,40));
+        buttonclear.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\buttonclear.png"));
+        
+        buttonequal.setPreferredSize(new Dimension(100,40));
+        buttonequal.setIcon(new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Desktop\\Number Icon\\buttonequal.png"));
+        
+        
+        panel.add(button1);
+        panel.add(button2);
+        panel.add(button3);
+        panel.add(button4);
+        panel.add(button5);
+        panel.add(button6);
+        panel.add(button7);
+        panel.add(button8);
+        panel.add(button9);
+        panel.add(button0);
+        panel.add(buttondot);
+        panel.add(buttonsub);
+        panel.add(buttonmul);
+        panel.add(buttondiv);
+        panel.add(buttonadd);
+        panel.add(buttonequal);
+        panel.add(buttonclear);
+        
+        button1.addActionListener((ActionListener) this);
+        button2.addActionListener((ActionListener) this);
+        button3.addActionListener((ActionListener) this);
+        button4.addActionListener((ActionListener) this);
+        button5.addActionListener((ActionListener) this);
+        button6.addActionListener((ActionListener) this);
+        button7.addActionListener((ActionListener) this);
+        button8.addActionListener((ActionListener) this);
+        button9.addActionListener((ActionListener) this);
+        button0.addActionListener((ActionListener) this);
+        buttondot.addActionListener((ActionListener) this);
+        buttonsub.addActionListener((ActionListener) this);
+        buttonmul.addActionListener((ActionListener) this);
+        buttondiv.addActionListener((ActionListener) this);
+        buttonadd.addActionListener((ActionListener) this);
+        buttonequal.addActionListener((ActionListener) this);
+        buttonclear.addActionListener((ActionListener) this);
         
     }
-    public void paint(Graphics g){
-        if(moves==0)
-        {
-            snakexlength[0]=100;
-            snakexlength[1]=75;
-            snakexlength[2]=50;
-
-            snakeylength[0]=100;
-            snakeylength[1]=100;
-            snakeylength[2]=100;
-
-        }
-       //border of title image 
-        g.setColor(Color.red);
-        g.drawRect(24, 10, 851, 55);
-        
-        titleImage = new ImageIcon("snaketitle.jpg");
-        titleImage.paintIcon(this, g, 25, 11);
-        
-        //border of gameplay 
-        g.setColor(Color.red);
-        g.drawRect(24, 74, 851, 577);
-        g.setColor(Color.BLACK);
-        g.fillRect(25, 75, 850, 575);
-        
-        //draw the score
-        g.setColor(Color.WHITE);
-        g.setFont(new Font ("arial",Font.PLAIN,14));
-        g.drawString("Scores : "+score,780, 30);
-        
-        g.drawString("Length : "+lengthofsnake,780, 50);
-
-        
-        
-        
-        rightmouth=new ImageIcon("rightmouth.png");
-        rightmouth.paintIcon(this, g, snakexlength[0], snakeylength[0]);
-        
-        for(int a=0;a<lengthofsnake;a++)
-        {
-            if(a==0 && right)
-            {
-                rightmouth=new ImageIcon("rightmouth.png");
-                rightmouth.paintIcon(this, g, snakexlength[a], snakeylength[a]);
-            }
-            if(a==0 && left)
-            {
-                leftmouth=new ImageIcon("leftmouth.png");
-                leftmouth.paintIcon(this, g, snakexlength[a], snakeylength[a]);
-            }
-            if(a==0 && up)
-            {
-                upmouth=new ImageIcon("upmouth.png");
-                upmouth.paintIcon(this, g, snakexlength[a], snakeylength[a]);
-            }
-            if(a==0 && down)
-            {
-                downmouth=new ImageIcon("downmouth.png");
-                downmouth.paintIcon(this, g, snakexlength[a], snakeylength[a]);
-            }
-            if(a!=0)
-            {
-                snakeimage=new ImageIcon("snakeimage.png");
-                snakeimage.paintIcon(this, g, snakexlength[a], snakeylength[a]);
-            }
-        }
-        enemyimage = new ImageIcon("enemy.png");
-        
-        if(enemyxpos[xpos]==snakexlength[0] && enemyypos[ypos]==snakeylength[0])
-        {
-          lengthofsnake++;
-          score++;
-          xpos=random.nextInt(34);
-          ypos=random.nextInt(23);
-
-        }
-        enemyimage.paintIcon(this, g, enemyxpos[xpos], enemyypos[ypos]);
-         
-        for(int b=1;b<lengthofsnake;b++)
-        {
-            if(snakexlength[b]==snakexlength[0] && snakeylength[b]==snakeylength[0])
-            {
-                right=false;
-                left=false;
-                up=false;
-                down=false;
-                
-                g.setColor(Color.red);
-                g.setFont(new Font("arial",Font.BOLD,50));
-                g.drawString("Game Over", 300, 300);
-                
-                g.setFont(new Font("arial",Font.BOLD,20));
-                g.drawString("Space to RESTART", 350, 340);
-                
-            }
-        }
-        g.dispose();
-    }
-
     @Override
-    public void keyTyped(KeyEvent e) 
-    {
-        if(right)
-        {
-            for(int i=lengthofsnake-1;i>=0;i--)
-            {
-                snakeylength[i+1]=snakeylength[i];
-            }
-            for(int i=lengthofsnake;i>=0;i--)
-            {
-                if(i==0)
-                {
-                snakexlength[i]=snakexlength[i]+25;
-
-                }
-                else
-                {
-                    snakexlength[i]=snakexlength[i-1];
-                }
-                if(snakexlength[i]>850)
-                {
-                    snakexlength[i]=25;
-                }
-            }
-            repaint();
+    public void actionPerformed(ActionEvent e){
+        Object source =  e.getSource();
+        if(source == buttonclear){
+            number1=0.0;
+            number2=0.0;
+            textarea.setText(" ");
         }
-        if(left)
-        {
-            for(int i=lengthofsnake-1;i>=0;i--)
-            {
-                snakeylength[i+1]=snakeylength[i];
-            }
-            for(int i=lengthofsnake;i>=0;i--)
-            {
-                if(i==0)
-                {
-                snakexlength[i]=snakexlength[i]-25;
-
-                }
-                else
-                {
-                    snakexlength[i]=snakexlength[i-1];
-                }
-                if(snakexlength[i]<25)
-                {
-                    snakexlength[i]=850;
-                }
-            }
-            repaint();
+        if(source == button1){
+           textarea.append("1");
         }
-        if(up)
-        {
-            for(int i=lengthofsnake-1;i>=0;i--)
-            {
-                snakexlength[i+1]=snakexlength[i];
-            }
-            for(int i=lengthofsnake;i>=0;i--)
-            {
-                if(i==0)
-                {
-                snakeylength[i]=snakeylength[i]-25;
-
-                }
-                else
-                {
-                    snakeylength[i]=snakeylength[i-1];
-                }
-                if(snakeylength[i]<75)
-                {
-                    snakeylength[i]=625;
-                }
-            }
-            repaint();
+        if(source == button2){
+           textarea.append("2");
         }
-        if(down)
-        {
-            for(int i=lengthofsnake-1;i>=0;i--)
-            {
-                snakexlength[i+1]=snakexlength[i];
-            }
-            for(int i=lengthofsnake;i>=0;i--)
-            {
-                if(i==0)
-                {
-                snakeylength[i]=snakeylength[i]+25;
+        if(source == button3){
+           textarea.append("3");
+        }
+        if(source == button4){
+           textarea.append("4");
+        }
+        if(source == button5){
+           textarea.append("5");
+        }
+        if(source == button6){
+           textarea.append("6");
+        }
+        if(source == button7){
+           textarea.append("7");
+        }
+        if(source == button8){
+           textarea.append("8");
+        }
+        if(source == button9){
+           textarea.append("9");
+        }
+        if(source == button0){
+           textarea.append("0");
+        }
+        if(source == buttondot){
+           textarea.append(".");
+        }
+        if(source == buttonadd){
+           number1=number_reader();
+           textarea.setText("+");
+           addc=1;
+           divc=0;
+           subc=0;
+           mulc=0;
+           
+        }
+        if(source == buttondiv){
+            number1=number_reader();
+           textarea.append("");
+           addc=0;
+           divc=1;
+           subc=0;
+           mulc=0;
+        }
+        if(source == buttonsub){
+           number1=number_reader(); 
+           textarea.append("");
+           addc=0;
+           divc=0;
+           subc=1;
+           mulc=0;
+        }
+        if(source == buttonmul){
+           number1=number_reader(); 
+           textarea.append("");
+           addc=0;
+           divc=0;
+           subc=0;
+           mulc=1;
+        }
+        if(source == buttonequal){
+           number1=number_reader();
+           if(addc>0){
+               result=number1+number2;
+               textarea.setText(Double.toString(result));
+           }
+           if(subc>0){
+            result=number1-number2;
+            textarea.setText(Double.toString(result));
+        }
+          if(divc>0){
+            result=number1/number2;
+            textarea.setText(Double.toString(result));
+            
 
-                }
-                else
-                {
-                    snakeylength[i]=snakeylength[i-1];
-                }
-                if(snakeylength[i]>625)
-                {
-                    snakeylength[i]=75;
-                }
-            }
-            repaint();
+          } 
+          /*if(mulc>0){
+            result=number1/number2;
+            textarea.setText(Double.toString(result));
+          }*/
         }
     }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode()==KeyEvent.VK_RIGHT)
-        {
-            moves++;
-            if(!left)
-            {
-                right=true;
-            }
-            else
-            {
-                right=false;
-                left=true;
-            }
-            up=false;
-            down=false;
-        }
-        if(e.getKeyCode()==KeyEvent.VK_LEFT)
-        {
-            moves++;
-            if(!right)
-            {
-                left=true;
-            }
-            else
-            {
-                left=false;
-                right=true;
-            }
-            up=false;
-            down=false;
-        }
-        if(e.getKeyCode()==KeyEvent.VK_UP)
-        {
-            moves++;
-            if(!down)
-            {
-                up=true;
-            }
-            else
-            {
-                up=false;
-                down=true;
-            }
-            left=false;
-            right=false;
-        }
-        if(e.getKeyCode()==KeyEvent.VK_DOWN)
-        {
-            moves++;
-            if(!up)
-            {
-                down=true;
-            }
-            else
-            {
-                down=false;
-                up=true;
-            }
-            left=false;
-            right=false;
-        }
-        if(e.getKeyCode()==KeyEvent.VK_SPACE)
-        {
-            score=0;
-            moves=0;
-            lengthofsnake=3;
-            repaint();
-        }
+    public double number_reader(){
+      double num1;
+      String s;
+      s=textarea.getText();
+      num1=Double.valueOf(s);
+      return num1;
     }
+  }
 
-    
-    
-    @Override
-    public void keyReleased(KeyEvent e) {
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
-    
-}
